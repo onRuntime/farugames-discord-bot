@@ -14,7 +14,6 @@ public class StopCommand {
 		if(!member.hasPermission(Permission.ADMINISTRATOR)) {
 			return;
 		}
-		
 		FaruGamesBot.getInstance().setRunning(false);
 	}
 }
