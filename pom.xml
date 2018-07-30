@@ -64,11 +64,18 @@
 	<!-- DEPENDENCIES -->
 	<dependencies>
 	
+		<!-- SLF4J API -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+   		 	<artifactId>slf4j-simple</artifactId>
+    		<version>1.7.25</version>
+   		</dependency>
+	
 		<!-- JSON -->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20090211</version>
+			<version>20170516</version>
 			<scope>compile</scope>
 		</dependency>
 		

@@ -17,6 +17,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.farugames.discord.bot.FaruGamesBot;
 import net.farugames.discord.bot.commands.Command.ExecutorType;
+import net.farugames.discord.bot.commands.commands.basics.StopCommand;
 
 public final class CommandMap {
 	 
@@ -24,7 +25,7 @@ public final class CommandMap {
     private static String tag = "/";
    
     public CommandMap() {
-    	registerCommands();
+    	registerCommands(new StopCommand());
     }
    
     public static String getTag() {
@@ -59,13 +60,13 @@ public final class CommandMap {
     public void commandConsole(String command){
         Object[] object = getCommand(command);
         if(object[0] == null || ((SimpleCommand)object[0]).getExecutorType() == ExecutorType.USER){
-            System.out.println("Commande inconnue.");
+            System.out.println("Unknewn command.");
             return;
         }
         try{
             execute(((SimpleCommand)object[0]), command, (String[])object[1], null);
         }catch(Exception exception){
-            System.out.println("La methode "+((SimpleCommand)object[0]).getMethod().getName()+" n'est pas correctement initialis�e.");
+            System.out.println("Method "+((SimpleCommand)object[0]).getMethod().getName()+" wasn't correctly initialized.");
         }
     }
    
@@ -75,7 +76,7 @@ public final class CommandMap {
         try{
             execute(((SimpleCommand)object[0]), command,(String[])object[1], message);
         }catch(Exception exception){
-            System.out.println("La methode "+((SimpleCommand)object[0]).getMethod().getName()+" n'est pas correctement initialis�e.");
+            System.out.println("Method "+((SimpleCommand)object[0]).getMethod().getName()+"  wasn't correctly initialized.");
         }
         return true;
     }
@@ -99,7 +100,7 @@ public final class CommandMap {
             else if(parameters[i].getType() == Guild.class) objects[i] = message == null ? null : message.getGuild();
             else if(parameters[i].getType() == String.class) objects[i] = command;
             else if(parameters[i].getType() == Message.class) objects[i] = message;
-            else if(parameters[i].getType() == JDA.class) objects[i] = FaruGamesBot.getJDA();
+            else if(parameters[i].getType() == JDA.class) objects[i] = FaruGamesBot.getInstance().getJDA();
             else if(parameters[i].getType() == MessageChannel.class) objects[i] = message == null ? null : message.getChannel();
         }
         simpleCommand.getMethod().invoke(simpleCommand.getObject(), objects);

@@ -8,41 +8,46 @@ import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import net.farugames.discord.bot.listeners.ListenerManager;
-import net.farugames.discord.bot.listeners.message.MessageReceivedListener;
 
 public class FaruGamesBot implements Runnable {
 
-	private static JDA jda;
+	private static FaruGamesBot instance;
+	
+	private JDA jda;
 	
 	private Boolean running;
+	private static Thread thread;
 	
 	public static void main(String[] args) {
-		new Thread(new FaruGamesBot(), "bot").start();
+		thread = new Thread(new FaruGamesBot(), "bot");
+		thread.start();
 	}
 	
 	public FaruGamesBot() {
+		instance = this;
 		try {
-			jda = new JDABuilder(AccountType.BOT)
+			this.jda = new JDABuilder(AccountType.BOT)
 					.setToken("NDY2MDI1OTI3OTE1MjA4NzA2.DiWEmw.7eMka8vJpbI2BaXYOFO8H7GtqLU")
+					.setGame(Game.watching("UNDER DEVELOPMENT ● PLAY.FARUGAMES.NET"))
 					.addEventListener(new ListenerManager())
-					.setGame(Game.watching("Currently under maintenance."))
 					.setStatus(OnlineStatus.ONLINE)
 				.buildAsync();
 			System.out.println("FaruGames BOT has been started.");
-		} catch (LoginException | IllegalArgumentException e) {
-			e.printStackTrace();
+		} catch (LoginException | IllegalArgumentException exception) {
+			exception.printStackTrace();
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void run() {
 		this.running = true;
 		
 		while(this.running) {
-			jda.addEventListener(new MessageReceivedListener());
 		}
 		
-		jda.shutdown();
+		this.jda.shutdown();
+		thread.destroy();
 		System.out.println("FaruGames BOT has been stoped.");
 		System.exit(0);
 	}
@@ -51,7 +56,11 @@ public class FaruGamesBot implements Runnable {
 		this.running = running;
 	}
 	
-	public static JDA getJDA() {
-		return jda;
+	public JDA getJDA() {
+		return this.jda;
+	}
+	
+	public static FaruGamesBot getInstance() {
+		return instance;
 	}
 }
