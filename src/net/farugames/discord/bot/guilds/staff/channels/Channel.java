@@ -1,4 +1,4 @@
-package net.farugames.discord.bot.channels;
+package net.farugames.discord.bot.guilds.staff.channels;
 
 public enum Channel {
 

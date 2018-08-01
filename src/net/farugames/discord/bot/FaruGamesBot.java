@@ -41,8 +41,8 @@ public class FaruGamesBot implements Runnable {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void run() {
-		this.running = true;
 		
+		this.running = true;
 		while(this.running) {
 		}
 		

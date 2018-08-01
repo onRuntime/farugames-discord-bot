@@ -1,10 +1,10 @@
-package net.farugames.discord.bot.listeners.roles;
+package net.farugames.discord.bot.listeners.guild.genericguild.genericguildmember;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import net.dv8tion.jda.core.events.guild.member.GuildMemberRoleAddEvent;
-import net.farugames.discord.bot.channels.Channel;
+import net.farugames.discord.bot.guilds.staff.channels.Channel;
 
 public class GuildMemberRoleAddListener {
 
