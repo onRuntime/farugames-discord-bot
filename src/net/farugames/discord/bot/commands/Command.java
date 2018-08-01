@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 public @interface Command {
 
 	public String name();
-	public String description() default "Pas de description.";
+	public String description() default "No description set.";
 	public ExecutorType type() default ExecutorType.ALL;
 	
 	public enum ExecutorType {
-		ALL, USER, ADMIN, CONSOLE;
+		ALL, USER, HELPER, MODERATOR, ADMIN, CONSOLE;
 	}
 	
 }

@@ -7,9 +7,10 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
+import net.farugames.discord.bot.data.mysql.MySQLManager;
 import net.farugames.discord.bot.listeners.ListenerManager;
 
-public class FaruGamesBot implements Runnable {
+public class FaruGamesBot extends MySQLManager implements Runnable {
 
 	private static FaruGamesBot instance;
 	
